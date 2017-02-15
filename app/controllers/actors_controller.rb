@@ -1,14 +1,12 @@
 class ActorsController < ApplicationController
   def index
     @actors = Actor.all
-
     render("actors/index.html.erb")
   end
 
   def show
     @actor = Actor.find(params[:id])
     @character = Character.new
-
     render("actors/show.html.erb")
   end
 
@@ -25,6 +23,14 @@ class ActorsController < ApplicationController
     @actor.dob = params[:dob]
     @actor.bio = params[:bio]
     @actor.image_url = params[:image_url]
+
+    # save_status = @actor.save
+    #
+    # if save_status == true
+    #   redirect_to("/actors/#{@actor.id}", :notice => "Actor created successfully.")
+    # else
+    #   render("actors/new.html.erb")
+    # end
 
     save_status = @actor.save
 
