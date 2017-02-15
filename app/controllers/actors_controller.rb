@@ -7,6 +7,7 @@ class ActorsController < ApplicationController
 
   def show
     @actor = Actor.find(params[:id])
+    @character = Character.new
 
     render("actors/show.html.erb")
   end
@@ -65,7 +66,7 @@ class ActorsController < ApplicationController
     if URI(request.referer).path == "/actors/#{@actor.id}"
       redirect_to("/", :notice => "Actor deleted.")
     else
-      redirect_to(:back, :notice => "Actor deleted.")
+      redirect_to("/actors", :notice => "Actor deleted.")
     end
   end
 end

@@ -14,6 +14,11 @@ class CharactersController < ApplicationController
   def new
     @character = Character.new
 
+    @character.movie_id = params[:movie_id]
+    @character.name = params[:name]
+    @character.actor_id = params[:actor_id]
+    save_status = @character.save
+
     render("characters/new.html.erb")
   end
 
@@ -63,7 +68,7 @@ class CharactersController < ApplicationController
     if URI(request.referer).path == "/characters/#{@character.id}"
       redirect_to("/", :notice => "Character deleted.")
     else
-      redirect_to(:back, :notice => "Character deleted.")
+      redirect_to("/characters", :notice => "Character deleted.")
     end
   end
 end
